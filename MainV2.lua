@@ -6495,7 +6495,13 @@ function ModernV2:RegisiterItem(Frame: Frame , Signel)
 		end;
 
 		function Paragraph:SetVisible(value)
-			ParagraphFrame.Visible = value ~= false;
+			local isVisible = value ~= false;
+			ParagraphFrame.Visible = isVisible;
+			if not isVisible then
+				ParagraphFrame.Size = UDim2.new(0, 0, 0, 0);
+			else
+				task.defer(UpdateSize);
+			end
 			return Paragraph;
 		end;
 
