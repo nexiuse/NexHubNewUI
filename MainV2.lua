@@ -1,4 +1,4 @@
--- [ModernV2] | [Modified By nexahub] | [Version : 0.2.3]
+-- [ModernV2] | [Modified By Team Luaplat] | [Version : 0.2.3]
 do
 	local Constant = 'L'..'P'..'H'..'_NO_VIRTUALIZE';
 	getfenv()[Constant] = getfenv()[Constant] or function(f) return f end;
@@ -6495,13 +6495,7 @@ function ModernV2:RegisiterItem(Frame: Frame , Signel)
 		end;
 
 		function Paragraph:SetVisible(value)
-			local isVisible = value ~= false;
-			ParagraphFrame.Visible = isVisible;
-			if not isVisible then
-				ParagraphFrame.Size = UDim2.new(0, 0, 0, 0);
-			else
-				task.defer(UpdateSize);
-			end
+			ParagraphFrame.Visible = value ~= false;
 			return Paragraph;
 		end;
 
@@ -11474,8 +11468,6 @@ function ModernV2:CreateWindow(Config)
 				Icon.ImageColor3 = Color3.fromRGB(223, 223, 223)
 				Icon.ImageTransparency = 0.500
 				Icon.ScaleType = Enum.ScaleType.Fit
-				-- Hide icon so the label can use the full button width
-				Icon.Visible = false
 
 				Label.Name = ModernV2.RandomString();
 				Label.Parent = Button
@@ -11484,17 +11476,15 @@ function ModernV2:CreateWindow(Config)
 				Label.BackgroundTransparency = 1.000
 				Label.BorderColor3 = Color3.fromRGB(0, 0, 0)
 				Label.BorderSizePixel = 0
-				-- Start from x=3 (no icon offset) and use full button width
-				Label.Position = UDim2.new(0, 3, 0.5, 0)
-				Label.Size = UDim2.new(1, -6, 0, 15)
+				Label.Position = UDim2.new(0, 29, 0.5, 0)
+				Label.Size = UDim2.new(1, -34, 0, 15)
 				Label.ZIndex = 12
 				Label.Font = Enum.Font.GothamMedium
 				Label.Text = SubTab.Name
 				Label.TextColor3 = Color3.fromRGB(255, 255, 255)
-				-- Smaller text size so names fit even with many tabs
-				Label.TextSize = 9.000
+				Label.TextSize = 11.000
 				Label.TextTransparency = 0.500
-				Label.TextXAlignment = Enum.TextXAlignment.Center
+				Label.TextXAlignment = Enum.TextXAlignment.Left
 				Label.TextTruncate = Enum.TextTruncate.AtEnd
 				ModernV2:AddTextGradient(Label);
 
@@ -14262,8 +14252,8 @@ function ModernV2:CreateNotification()
 		LogoImage.BackgroundTransparency = 1.000
 		LogoImage.BorderColor3 = Color3.fromRGB(0, 0, 0)
 		LogoImage.BorderSizePixel = 0
-		LogoImage.Position = UDim2.new(0, 8, 0.5, 0)
-		LogoImage.Size = UDim2.new(0, 28, 0, 28)
+		LogoImage.Position = UDim2.new(0, 10, 0.5, 0)
+		LogoImage.Size = UDim2.new(0, 35, 0, 35)
 		LogoImage.ZIndex = 131
 		LogoImage.Image = IsImageIcon and IconId or ""
 		LogoImage.ImageColor3 = ModernV2.IconColor;
@@ -14279,8 +14269,8 @@ function ModernV2:CreateNotification()
 		LogoIcon.BackgroundTransparency = 1.000
 		LogoIcon.BorderColor3 = Color3.fromRGB(0, 0, 0)
 		LogoIcon.BorderSizePixel = 0
-		LogoIcon.Position = UDim2.new(0, 8, 0.5, 0)
-		LogoIcon.Size = UDim2.new(0, 28, 0, 28)
+		LogoIcon.Position = UDim2.new(0, 10, 0.5, 0)
+		LogoIcon.Size = UDim2.new(0, 35, 0, 35)
 		LogoIcon.ZIndex = 131
 		ModernV2:SetIconMode(LogoIcon, IsImageIcon and "" or tostring(IconSource or "bell"))
 		LogoIcon.ImageColor3 = ModernV2.IconColor
@@ -14293,13 +14283,13 @@ function ModernV2:CreateNotification()
 		NotifyName.BackgroundTransparency = 1.000
 		NotifyName.BorderColor3 = Color3.fromRGB(0, 0, 0)
 		NotifyName.BorderSizePixel = 0
-		NotifyName.Position = UDim2.new(0, 42, 0, 5)
-		NotifyName.Size = UDim2.new(0, 200, 0, 16)
+		NotifyName.Position = UDim2.new(0, 50, 0, 7)
+		NotifyName.Size = UDim2.new(0, 200, 0, 20)
 		NotifyName.ZIndex = 132
 		NotifyName.Font = Enum.Font.GothamBold
 		NotifyName.Text = Config.Title
 		NotifyName.TextColor3 = Color3.fromRGB(255, 255, 255)
-		NotifyName.TextSize = 13.000
+		NotifyName.TextSize = 17.000
 		NotifyName.TextXAlignment = Enum.TextXAlignment.Left
 
 		NotifyContent.Name = ModernV2.RandomString();
@@ -14308,13 +14298,13 @@ function ModernV2:CreateNotification()
 		NotifyContent.BackgroundTransparency = 1.000
 		NotifyContent.BorderColor3 = Color3.fromRGB(0, 0, 0)
 		NotifyContent.BorderSizePixel = 0
-		NotifyContent.Position = UDim2.new(0, 42, 0, 22)
-		NotifyContent.Size = UDim2.new(0, 200, 0, 13)
+		NotifyContent.Position = UDim2.new(0, 50, 0, 28)
+		NotifyContent.Size = UDim2.new(0, 200, 0, 15)
 		NotifyContent.ZIndex = 132
 		NotifyContent.Font = Enum.Font.GothamBold
 		NotifyContent.Text = Config.Content
 		NotifyContent.TextColor3 = Color3.fromRGB(255, 255, 255)
-		NotifyContent.TextSize = 10.000
+		NotifyContent.TextSize = 12.000
 		NotifyContent.TextTransparency = 0.650
 		NotifyContent.TextXAlignment = Enum.TextXAlignment.Left
 
@@ -14323,15 +14313,14 @@ function ModernV2:CreateNotification()
 
 		local MainSize = math.max(Size1.X , Size2.X);
 
-		-- Compact notification: smaller height, width auto-fits text
-		NotifyFrame.Size = UDim2.new(0, MainSize + 52, 0, 46);
+		NotifyFrame.Size = UDim2.new(0, MainSize + 65, 0, 55);
 
 		shadow:Render(true)
 		ModernV2.PlayAnimate(NotifyFrame , VSlowTween , {
 			Position = UDim2.new(1, 0, 0, 0)
 		})
 
-		ContainerFrame.Size = UDim2.new(0, 0, 0, 56)
+		ContainerFrame.Size = UDim2.new(0, 0, 0, 65)
 
 		task.delay(Config.Duration or 5 , LPH_NO_VIRTUALIZE(function()
 
